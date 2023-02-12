@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style type="text/css">
+        h1 {color: blue;}
+        body {text-align: center;}
+        input {height: 24px; width: 36px; margin-right: 16px;}
+        button {margin-top: 16px;}
+        table {margin: auto;}
+        .submit {padding: 16px; width: 100%; background-color: bisque; box-sizing: border-box;}
+        .resultField {margin-top: 16px; margin-bottom: 96px;}
+        .result {display: inline; margin-right: 16px;}
+        .help {margin: auto; width: 50%; padding: 16px 32px; background-color: rgb(207,207,196);}
+    </style>
+</head>
+<body>
+    <h1>身体质量指数(BMI)计算器</h1>
+    <div class="submit">
+        身高(cm)：<input id="h" type="number">
+        体重(kg)：<input id="w" type="number"><br>
+        <button type="button" onclick="cal()">计算结果</button>
+    </div>
+    <div class="resultField">BMI值：<div id="value" class="result"></div>身体状态：<div id="judge" class="result"></div></div>
+    <div class="help">
+        ？：身体质量指数(BMI)是常用的衡量人体胖瘦程度以及是否健康的一个标准，计算公式为：BMI=体重+身高<sup>2</sup>（其中体重为单位kg，身高单位为m），BMI因为地域不同，在实践中产生了不同标准，本网站判断身体状态时所采用的标准为中国标准，如下：<br><br>
+        <table  border="1">
+            <tr>
+                <th>BMI</th>
+                <th>身体状态</th>
+            </tr>
+            <tr>
+                <td>BMI&lt=18.4</td>
+                <td>偏瘦</td>
+            </tr>
+            <tr>
+                <td>18.4&ltBMI&lt=23.9</td>
+                <td>正常</td>
+            </tr>
+            <tr>
+                <td>23.9&ltBML&lt=27.9</td>
+                <td>过重</td>
+            </tr>
+            <tr>
+                <td>BMI&gt27.9</td>
+                <td>肥胖</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function cal() {
+            let height = document.getElementById("h").value;
+            let weight = document.getElementById("w").value;
+            let resultField = document.getElementById("value");
+            let judgeField = document.getElementById("judge");
+            let result = (weight/(height/100)**2).toFixed(1);
+            let judge;
+            if (result<=18.4) {
+                judge = "偏瘦";
+                resultField.style.color = 'grey';
+            } else if (result>18.4&&result<=23.9) {
+                judge = "正常";
+                resultField.style.color = 'green';
+            } else if (result>23.9&&result<=27.9) {
+                judge = "过重";
+                resultField.style.color = 'yellow';
+            } else if (result>27.9) {
+                judge = "肥胖";
+                resultField.style.color = 'red';
+            } 
+            resultField.innerHTML = result;
+            judgeField.innerHTML = judge;
+        }
+    </script>
+</body>
+</html>
